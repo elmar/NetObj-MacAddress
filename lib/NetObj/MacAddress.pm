@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+use warnings FATAL => 'all';
 package NetObj::MacAddress;
 
 # ABSTRACT: represent a MAC address
