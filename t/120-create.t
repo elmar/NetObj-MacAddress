@@ -17,6 +17,7 @@ for my $macaddr (
     '20-33-01-7B-27-BF', # dash separated
     '2015.0401.1514',    # dot separated
     '082015e5da7c',      # base16
+    'P3/v5-',            # raw binary MAC (any 6 bytes)
 ) {
     my $mac = NetObj::MacAddress->new($macaddr);
     is(ref($mac), 'NetObj::MacAddress', "generate object for $macaddr");
