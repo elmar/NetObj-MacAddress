@@ -23,6 +23,11 @@ for my $macaddr (
     is(ref($mac), 'NetObj::MacAddress', "generate object for $macaddr");
 }
 
+# cloning an exiting NetObj::MacAddress is valid
+my $mac1 = NetObj::MacAddress->new('0123456789ab');
+my $mac2 = NetObj::MacAddress->new($mac1);
+is(ref($mac2), 'NetObj::MacAddress', 'cloning a NetObj::MacAddress object');
+
 for my $macaddr (
     # some invalid MAC addresses
     '00:12:34:a4:ce',    # too short

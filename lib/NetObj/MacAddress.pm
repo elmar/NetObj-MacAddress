@@ -35,6 +35,8 @@ sub BUILDARGS {
     croak 'no MAC address given' unless defined($mac);
     croak 'too many arguments in constructor for ' . __PACKAGE__ if @args;
 
+    return { binary => $mac->binary() } if ref($mac) eq __PACKAGE__;
+
     $mac = _to_binary($mac) unless length($mac) == 6;
     croak 'invalid MAC address' unless $mac;
     return { binary => $mac };
