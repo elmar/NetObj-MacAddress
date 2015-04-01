@@ -26,4 +26,18 @@ sub is_valid {
     return !! _to_binary($macaddr);
 }
 
+has binary => (
+    is => 'ro',
+);
+
+sub BUILDARGS {
+    my ($class, $mac, @args) = @_;
+    croak 'no MAC address given' unless defined($mac);
+    croak 'too many arguments in constructor for ' . __PACKAGE__ if @args;
+
+    $mac = _to_binary($mac);
+    croak 'invalid MAC address' unless $mac;
+    return { binary => $mac };
+}
+
 1;
