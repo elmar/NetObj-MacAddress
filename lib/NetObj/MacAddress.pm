@@ -42,4 +42,10 @@ sub BUILDARGS {
     return { binary => $mac };
 }
 
+sub to_string {
+    my ($self) = @_;
+
+    return join('', unpack('H2' x 6, $self->binary()));
+}
+
 1;
