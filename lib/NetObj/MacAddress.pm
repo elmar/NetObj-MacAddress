@@ -48,4 +48,6 @@ sub to_string {
     return join('', unpack('H2' x 6, $self->binary()));
 }
 
+use overload q("") => sub {shift->to_string};
+
 1;

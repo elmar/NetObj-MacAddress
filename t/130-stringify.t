@@ -17,3 +17,5 @@ is(
     '303132333435',
     'conversion to string',
 );
+
+is("$mac", '303132333435', 'implicit stringification');
