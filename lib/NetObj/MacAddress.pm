@@ -83,4 +83,14 @@ sub is_multicast {
     return not $self->is_unicast();
 }
 
+sub is_global {
+    my ($self) = @_;
+    return not vec($self->binary(), 1, 1);
+}
+
+sub is_local {
+    my ($self) = @_;
+    return not $self->is_global();
+}
+
 1;
