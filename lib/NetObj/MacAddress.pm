@@ -73,9 +73,14 @@ use overload q(cmp) => sub { my ($x, $y) = @_; return "$x" cmp "$y" };
 # NOTE: vec(EXPR, OFFSET, BITS) treats EXPR as little endian on all platforms
 # see: perldoc -f vec
 
+sub is_unicast {
+    my ($self) = @_;
+    return not vec($self->binary(), 0, 1);
+}
+
 sub is_multicast {
     my ($self) = @_;
-    return !! vec($self->binary(), 0, 1);
+    return not $self->is_unicast();
 }
 
 1;
