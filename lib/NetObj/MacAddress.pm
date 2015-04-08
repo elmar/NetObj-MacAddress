@@ -43,25 +43,25 @@ sub BUILDARGS {
     return { binary => $mac };
 }
 
+use NetObj::MacAddress::Formatter::Base16;
 sub to_string {
     my ($self, $format) = @_;
     $format //= 'base16';
     $format = lc($format);
 
-    state $formatter = {
-        base16 => sub { join('', unpack('H2' x 6, $_[0]->binary())) },
-        colons => sub { join(':', unpack('H2' x 6, $_[0]->binary())) },
-        dashes => sub { uc(join('-', unpack('H2' x 6, $_[0]->binary()))) },
-        dots   => sub { join('.', unpack('H4' x 3, $_[0]->binary())) },
-    };
+    state $formatter = {};
 
-    if (exists($formatter->{$format})) {
-        return $formatter->{$format}($self);
+    if (not exists($formatter->{$format})) {
+        my $pkg = ucfirst($format);
+        my $sub = "NetObj::MacAddress::Formatter::${pkg}::format";
+        if (defined(&$sub)) {
+            $formatter->{$format} = \&$sub;
+        }
+        else {
+            croak "no formatter for $format";
+        }
     }
-    else {
-        croak "no formatter for $format";
-    }
-    return;
+    return $formatter->{$format}($self);
 }
 
 use overload q("") => sub {shift->to_string};
