@@ -17,6 +17,8 @@ is($mac->to_string('base16'), '3031324d5a6b',      'formatting with raw hex');
 is($mac->to_string('colons'), '30:31:32:4d:5a:6b', 'formatting with colons');
 is($mac->to_string('dashes'), '30-31-32-4D-5A-6B', 'formatting with dashes');
 is($mac->to_string('dots'),   '3031.324d.5a6b',    'formatting with dots');
+is($mac->to_string('DOTS'),   '3031.324d.5a6b',    'formatting with DOTS');
+is($mac->to_string('dOtS'),   '3031.324d.5a6b',    'formatting with dOtS');
 
 
 throws_ok(

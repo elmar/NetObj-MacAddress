@@ -46,6 +46,7 @@ sub BUILDARGS {
 sub to_string {
     my ($self, $format) = @_;
     $format //= 'base16';
+    $format = lc($format);
 
     state $formatter = {
         base16 => sub { join('', unpack('H2' x 6, $_[0]->binary())) },
