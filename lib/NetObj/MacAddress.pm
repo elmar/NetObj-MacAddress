@@ -67,4 +67,5 @@ sub to_string {
 use overload q("") => sub {shift->to_string};
 
 use overload q(<=>) => sub { my ($x, $y) = @_; return "$x" cmp "$y" };
+use overload q(cmp) => sub { my ($x, $y) = @_; return "$x" cmp "$y" };
 1;
