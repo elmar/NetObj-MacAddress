@@ -1,0 +1,26 @@
+#!perl
+use strict;
+use warnings;
+use 5.014;
+
+BEGIN { chdir 't' if -d 't'; }
+use lib '../lib';
+
+use Test::More; END { done_testing; }
+use Test::Exception;
+
+use NetObj::MacAddress;
+
+my $mac = NetObj::MacAddress->new('012MZk'); # 6 bytes raw MAC address
+
+is($mac->to_string('base16'), '3031324d5a6b',      'formatting with raw hex');
+is($mac->to_string('colons'), '30:31:32:4d:5a:6b', 'formatting with colons');
+is($mac->to_string('dashes'), '30-31-32-4D-5A-6B', 'formatting with dashes');
+is($mac->to_string('dots'),   '3031.324d.5a6b',    'formatting with dots');
+
+
+throws_ok(
+    sub { $mac->to_string('%') }, # '%' should not be a valid formatter name
+    qr{no formatter},
+    'invalid formatter name throws exception',
+);

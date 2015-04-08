@@ -1,5 +1,6 @@
 use strict;
 use warnings FATAL => 'all';
+use 5.014;
 package NetObj::MacAddress;
 
 # ABSTRACT: represent a MAC address
@@ -43,9 +44,23 @@ sub BUILDARGS {
 }
 
 sub to_string {
-    my ($self) = @_;
+    my ($self, $format) = @_;
+    $format //= 'base16';
 
-    return join('', unpack('H2' x 6, $self->binary()));
+    state $formatter = {
+        base16 => sub { join('', unpack('H2' x 6, $_[0]->binary())) },
+        colons => sub { join(':', unpack('H2' x 6, $_[0]->binary())) },
+        dashes => sub { uc(join('-', unpack('H2' x 6, $_[0]->binary()))) },
+        dots   => sub { join('.', unpack('H4' x 3, $_[0]->binary())) },
+    };
+
+    if (exists($formatter->{$format})) {
+        return $formatter->{$format}($self);
+    }
+    else {
+        croak "no formatter for $format";
+    }
+    return;
 }
 
 use overload q("") => sub {shift->to_string};
