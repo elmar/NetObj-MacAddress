@@ -1,6 +1,8 @@
 use strict;
 use warnings FATAL => 'all';
 
+# ABSTRACT: formatting MAC addresses with colon separated hex values
+
 package NetObj::MacAddress::Formatter::Colons;
 
 sub format {

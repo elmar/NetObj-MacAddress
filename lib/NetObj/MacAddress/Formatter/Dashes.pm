@@ -1,6 +1,8 @@
 use strict;
 use warnings FATAL => 'all';
 
+# ABSTRACT: formatting MAC addresses with dash separated hex values
+
 package NetObj::MacAddress::Formatter::Dashes;
 
 sub format {

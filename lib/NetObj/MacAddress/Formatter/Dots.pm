@@ -1,6 +1,8 @@
 use strict;
 use warnings FATAL => 'all';
 
+# ABSTRACT: formatting MAC addresses in Cisco notation
+
 package NetObj::MacAddress::Formatter::Dots;
 
 sub format {
