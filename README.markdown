@@ -1,5 +1,7 @@
 # NetObj::MacAddress
 
+[![Travis CI Build Status](https://travis-ci.org/elmar/NetObj-MacAddress.svg)](https://travis-ci.org/elmar/NetObj-MacAddress)
+
 The Perl module NetObj::MacAddress represents [MAC
 addresses](https://en.wikipedia.org/wiki/MAC_address).  The goal is to use an
 abstraction independent of any particular string representation.
