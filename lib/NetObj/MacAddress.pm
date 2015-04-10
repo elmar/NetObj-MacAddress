@@ -202,3 +202,6 @@ globally or locally assigned, respectively.
   $local_mac->is_global();  # false
   $global_mac->is_local();  # false
   $global_mac->is_global(); # true
+
+=for Pod::Coverage
+BUILDARGS
