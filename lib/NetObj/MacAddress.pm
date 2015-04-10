@@ -66,8 +66,14 @@ sub to_string {
 
 use overload q("") => sub {shift->to_string};
 
-use overload q(<=>) => sub { my ($x, $y) = @_; return "$x" cmp "$y" };
-use overload q(cmp) => sub { my ($x, $y) = @_; return "$x" cmp "$y" };
+use overload q(<=>) => sub {
+    my ($x, $y) = @_;
+    return $x->binary() cmp $y->binary()
+};
+use overload q(cmp) => sub {
+    my ($x, $y) = @_;
+    return "$x" cmp "$y"
+};
 
 
 # NOTE: vec(EXPR, OFFSET, BITS) treats EXPR as little endian on all platforms
