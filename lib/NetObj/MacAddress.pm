@@ -105,7 +105,7 @@ __END__
 
 =head1 SYNOPSIS
 
-  use NetObj::MacAddress
+  use NetObj::MacAddress;
 
   # construct, supports various typical notations
   my $mac1 = NetObj::MacAddress->new('08:00:20:1e:bc:78');
