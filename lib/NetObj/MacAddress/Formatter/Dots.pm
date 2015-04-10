@@ -11,3 +11,19 @@ sub format {
 }
 
 1;
+
+__END__
+
+=head1 SYNOPSIS
+
+  use NetObj::MacAddress::Formatter::Dots;
+    my $mac = NetObj::MacAddress->new('080020abcdef');
+      $mac->to_string('dots'); # '0800.20ab.cdef'
+
+=head1 DESCRIPTION
+
+Helper module to format a MAC address as a string in hex dot delimited format.
+
+=method format
+
+Method to do the actual formatting. Used by C<NetObj::MacAddress>.
