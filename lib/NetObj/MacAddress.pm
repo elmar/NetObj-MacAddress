@@ -209,5 +209,20 @@ globally or locally assigned, respectively.
   $global_mac->is_local();  # false
   $global_mac->is_global(); # true
 
+=head1 MOTIVATION
+
+This class aims to provide a conceptually simple interface to represent a MAC
+address.  The constructor takes a single argument in the form of a string in
+the most typical hex representations.  Exotic representations are not
+supported.  The resulting object is independent of the string representation
+used to construct it.  Two MAC addresses compare equal if the refer to the same
+bytes.
+
+The class shall fit right into the C<Moose> ecosystem.  It is implemented with
+C<Moo> to keep the overhead resonably small.
+
+For more background read the C<Motivation.markdown> file in the distribution of
+this module.
+
 =for Pod::Coverage
 BUILDARGS
