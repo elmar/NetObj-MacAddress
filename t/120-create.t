@@ -28,6 +28,37 @@ my $mac1 = NetObj::MacAddress->new('0123456789ab');
 my $mac2 = NetObj::MacAddress->new($mac1);
 is(ref($mac2), 'NetObj::MacAddress', 'cloning a NetObj::MacAddress object');
 
+# mentioning binary explicitly
+
+is(
+    ref(NetObj::MacAddress->new(binary => 'foobar')),
+    'NetObj::MacAddress',
+    'specifying binary in constructor',
+);
+is(
+    ref(NetObj::MacAddress->new({binary => 'foobar'})),
+    'NetObj::MacAddress',
+    'specifying hashref with binary key in constructor',
+);
+for my $macaddr (
+    # valid but not binary
+    '00:12:34:a4:ce:53',
+    '20-33-01-7B-27-BF',
+    '2015.0401.1514',
+    '082015e5da7c',
+) {
+    throws_ok(
+        sub { NetObj::MacAddress->new(binary => $macaddr) },
+        qr{invalid MAC},
+        "not a binary MAC: $macaddr",
+    );
+    throws_ok(
+        sub { NetObj::MacAddress->new({binary => $macaddr}) },
+        qr{invalid MAC},
+        "not a binary MAC: $macaddr",
+    );
+}
+
 for my $macaddr (
     # some invalid MAC addresses
     '00:12:34:a4:ce',    # too short

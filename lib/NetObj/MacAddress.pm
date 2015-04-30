@@ -34,6 +34,17 @@ has binary => (
 sub BUILDARGS {
     my ($class, $mac, @args) = @_;
     croak 'no MAC address given' unless defined($mac);
+
+    if ($mac eq 'binary') {
+        $mac = shift(@args);
+        if (length($mac) == 6) {
+            return { binary => $mac };
+        }
+        croak 'invalid MAC address';
+    }
+    if ((ref($mac) eq 'HASH') and exists($mac->{binary}) and (length($mac->{binary}) == 6)) {
+        return { binary => $mac->{binary} };
+    }
     croak 'too many arguments in constructor for ' . __PACKAGE__ if @args;
 
     return { binary => $mac->binary() } if ref($mac) eq __PACKAGE__;

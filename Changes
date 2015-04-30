@@ -3,6 +3,7 @@ Revision history for NetObj::MacAddress
 {{$NEXT}}
 
         - support Perl 5.10.1 and above
+        - allow explicit mention of binary attribute name in constructor
 
 1.0     2015-04-10 06:57:34Z
         - first release to the CPAN
