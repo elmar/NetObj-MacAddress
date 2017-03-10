@@ -191,8 +191,7 @@ Some formatters are available by default (see examples above), others can be
 added if needed by providing a module with a package name beginning with
 C<NetObj::MacAddress::Formatter::> similarly to the existing ones.
 
-=method is_multicast
-=method is_unicast
+=method is_multicast, is_unicast
 
 The methods C<is_multicast> and C<is_unicast> indicate whether a MAC address is
 multicast or unicast, respectively.
@@ -204,8 +203,7 @@ multicast or unicast, respectively.
   $multicast_mac->is_unicast();   # false
   $multicast_mac->is_multicast(); # true
 
-=method is_global
-=method is_local
+=method is_global, is_local
 
 The methods C<is_global> and C<is_local> indicate whether a MAC address is
 globally or locally assigned, respectively.
