@@ -5,7 +5,6 @@ package NetObj::MacAddress;
 
 # ABSTRACT: represent a MAC address
 
-use Moo;
 use Carp;
 
 sub _to_binary {
@@ -17,8 +16,6 @@ sub _to_binary {
     return pack('H2' x 6, unpack('A2' x 6, $macaddr));
 }
 
-use namespace::clean;
-
 sub is_valid {
     my ($macaddr) = @_;
     croak 'NetObj::MacAddress::is_valid is a class method only'
@@ -27,9 +24,10 @@ sub is_valid {
     return !! _to_binary($macaddr);
 }
 
-has binary => (
-    is => 'ro',
-);
+sub binary {
+    my ($self) = @_;
+    return $self->{binary};
+};
 
 sub BUILDARGS {
     my ($class, $mac, @args) = @_;
@@ -52,6 +50,11 @@ sub BUILDARGS {
     $mac = _to_binary($mac) unless length($mac) == 6;
     croak 'invalid MAC address' unless $mac;
     return { binary => $mac };
+}
+
+sub new {
+    my ($class, @args) = @_;
+    return bless BUILDARGS(@_), $class;
 }
 
 use NetObj::MacAddress::Formatter::Base16;
@@ -153,8 +156,6 @@ only valid MAC addresses can be instantiated.  Two MAC addresses compare equal
 if they represent the same address independently of the notation used in the
 constructor.
 
-NetObj::MacAddress is implemented as a Moose style object class (using Moo).
-
 =method is_valid
 
 The class method C<NetObj::MacAddress::is_valid> tests for the validity of a MAC address represented by a string.  It does not throw an exception but returns false for an invalid and true for a valid MAC address.
@@ -224,11 +225,9 @@ supported.  The resulting object is independent of the string representation
 used to construct it.  Two MAC addresses compare equal if the refer to the same
 bytes.
 
-The class shall fit right into the C<Moose> ecosystem.  It is implemented with
-C<Moo> to keep the overhead resonably small.
-
-For more background read the C<Motivation.markdown> file in the distribution of
-this module.
+Originally implemented as a Moo class this package is too small to warrant the
+number of dependencies.  It is now implemented as a simple Perl class and
+strives to have no non CORE dependencies.
 
 =for Pod::Coverage
 BUILDARGS
