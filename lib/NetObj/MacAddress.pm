@@ -138,6 +138,9 @@ __END__
 
   # allow raw binary MAC addresses (any combination of 6 bytes)
   my $mac4 = NetObj::MacAddress->new('l@,foo');
+  # specify binary explicitly
+  $mac4 = NetObj::MacAddress->new(binary => 'l@,foo');
+  $mac4 = NetObj::MacAddress->new({binary => 'l@,foo'});
   # represent as hex (base16)
   $mac4->to_string(); # '6c402c666f6f'
   # or as the raw binary
