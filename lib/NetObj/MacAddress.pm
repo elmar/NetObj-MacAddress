@@ -123,17 +123,11 @@ __END__
   my $mac2 = NetObj::MacAddress->new('08-00-20-1E-BC-78');
   my $mac3 = NetObj::MacAddress->new('6c40.087c.5e90');
 
-  # comparison, numerically
-  $mac1 == $mac2;  # true
-  $mac1 != $mac2;  # false
-  $mac1 == $mac3;  # false
-  $mac1 != $mac3;  # true
-
-  # comparison, stringwise
-  $mac1 eq $mac2;  # true
-  $mac1 ne $mac2;  # false
-  $mac1 eq $mac3;  # false
-  $mac1 ne $mac3;  # true
+  # numerical and stringwise comparisons are strictly equivalent
+  $mac1 == $mac2; $mac1 eq $mac2;  # true
+  $mac1 != $mac2; $mac1 ne $mac2;  # false
+  $mac1 == $mac3; $mac1 eq $mac3;  # false
+  $mac1 != $mac3; $mac1 ne $mac3;  # true
 
   # reject invalid MAC addresses
   my $invalid_mac = NetObj::MacAddress->new('foo'); # throws exception
