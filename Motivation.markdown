@@ -56,6 +56,26 @@ my $mac = MyApp::MacAddress->new('00-11-22-33-44-55');
 say "$mac"; # prints 00:11:22:33:44:55
 ```
 
+The same can be done for a simple non-Moo class:
+
+```perl
+#!/usr/bin/env perl
+use 5.014;
+use warnings FATAL => 'all';
+
+
+package MyApp::MacAddress {
+    use NetObj::MacAddress;
+    use NetObj::MacAddress::Formatter::Colons;
+    use base 'NetObj::MacAddress';
+
+    use overload q("") => sub {shift->to_string('colons')};
+};
+
+my $mac = MyApp::MacAddress->new('00-11-22-33-44-55');
+say "$mac"; # prints 00:11:22:33:44:55
+```
+
 If we needed a class that retained knowledge about the original representation
 of the MAC address at the time of constructing the object we could we could
 create a sub class for this too.  However, there is hardly a need for such a
